@@ -3,8 +3,10 @@
   "description": "Custom logging library using Google Cloud PHP Logging",
   "type": "library",
   "require": {
-    "google/cloud-logging": "^1.30.3"
+    "infinitalk/php-logging": "1.0.0"
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "PhpLogging": "src/"
