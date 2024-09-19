@@ -1,0 +1,14 @@
+{
+    "name": "infinitalk/php-logging",
+    "description": "Your custom logging library using Google Cloud PHP Logging",
+    "type": "library",
+    "require": {
+        "php": "^8.1",
+        "google/cloud-logging": "^1.30.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpLogging": "src/"
+        }
+    }
+}
