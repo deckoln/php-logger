@@ -3,7 +3,6 @@
   "description": "Custom logging library using Google Cloud PHP Logging",
   "type": "library",
   "require": {
-    "php": "^8.1",
     "google/cloud-logging": "^1.30.3"
   },
   "autoload": {
@@ -16,8 +15,5 @@
       "type": "vcs",
       "url": "https://bitbucket.org/jms-infinitalk/php-logging.git"
     }
-  ],
-  "require": {
-        "infinitalk/php-logging": "1.0.0"
-    }
+  ]
 }
