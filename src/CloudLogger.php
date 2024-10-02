@@ -1,5 +1,5 @@
 <?php
-require_once 'vendor/autoload.php';
+namespace Infinitalk\CloudLogger;
 
 use Google\Cloud\Logging\LoggingClient;
 
