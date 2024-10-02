@@ -1,6 +1,5 @@
 <?php
-
-namespace Php\Logging;
+require_once 'vendor/autoload.php';
 
 use Google\Cloud\Logging\LoggingClient;
 
