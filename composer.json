@@ -1,6 +1,6 @@
 {
   "name": "infinitalk/cloud-logger",
-  "description": "Custom logging library using Google Cloud PHP Logging",
+  "description": "Custom logging library for Cloud Run using Google Cloud PHP Logging",
   "type": "library",
   "require": {
     "php": "^8.0",
@@ -14,8 +14,8 @@
   },
   "authors": [
     {
-      "name": "Your Name",
-      "email": "your.email@example.com"
+      "name": "DuntX",
+      "email": "dunt@infinitalk.co.jp"
     }
   ],
   "minimum-stability": "stable"
