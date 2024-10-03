@@ -6,7 +6,7 @@
     "php": "^8.0",
     "google/cloud-logging": "^1.31.0"
   },
-  "prefer-stable": true,
+  "license": "MIT",
   "autoload": {
     "psr-4": {
       "Infinitalk\\CloudLogger\\": "src/"

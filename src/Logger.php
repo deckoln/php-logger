@@ -3,34 +3,36 @@ namespace Infinitalk\CloudLogger;
 
 use Google\Cloud\Logging\LoggingClient;
 
-class CloudLogger
+class Logger
 {
     private $logger;
-    private $logName;
     private const LOG_LEVELS = ['DEBUG', 'INFO', 'NOTICE', 'WARNING', 'ERROR', 'CRITICAL', 'ALERT', 'EMERGENCY'];
 
-    public function __construct($logName, array $resourceOptions = [], $projectId = null)
+    public function __construct(array $configs = [])
     {
         $options = [];
-        if ($projectId !== null) {
-            $options['projectId'] = $projectId;
+        if (isset($configs['project_id'])) {
+            $options['projectId'] = $configs['project_id'];
         }
 
         $logging = new LoggingClient($options);
 
-        $resourceLabels = [
-            'service_name' => $resourceOptions['service_name'] ?? getenv('K_SERVICE') ?: null,
-            'revision_name' => $resourceOptions['revision_name'] ?? getenv('K_REVISION') ?: null,
-            'location' => $resourceOptions['location'] ?? getenv('REGION') ?: null,
+        $labels = [
+            'service_name' => $configs['service_name'] ?? getenv('K_SERVICE') ?: null,
+            'revision_name' => $configs['revision_name'] ?? getenv('K_REVISION') ?: null,
+            'location' => $configs['location'] ?? getenv('REGION') ?: null,
         ];
+        $logName = $options['log_name'] 
+            ?? $options['service_name'] 
+            ?? getenv('K_SERVICE') 
+            ?? 'cloud_run_logging';
 
         $this->logger = $logging->logger($logName, [
             'resource' => [
                 'type' => 'cloud_run_revision',
-                'labels' => $resourceLabels
+                'labels' => $labels
             ]
         ]);
-        $this->logName = $logName;
     }
 
     private function isShouldLog($level)
@@ -43,9 +45,13 @@ class CloudLogger
 
     public function log($severity, $message, array $data = [], array $options = [])
     {
-        $bypassLevelCheck = $options['bypassLevelCheck'] ?? false;
+        $passLevelCheck = $options['passLevelCheck'] ?? false;
 
-        if (!$bypassLevelCheck && !$this->isShouldLog($severity)) {
+        if (!in_array($severity, self::LOG_LEVELS)) {
+            $severity = 'ERROR';
+        }
+
+        if (!$passLevelCheck && !$this->isShouldLog($severity)) {
             return;
         }
 
