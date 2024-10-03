@@ -48,7 +48,9 @@ class Logger
         $passLevelCheck = $options['passLevelCheck'] ?? false;
 
         if (!in_array($severity, self::LOG_LEVELS)) {
-            $severity = 'ERROR';
+            $parts = [$severity, $message];
+            $severity = 'WARNING';
+            $message = implode(' ', $parts);
         }
 
         if (!$passLevelCheck && !$this->isShouldLog($severity)) {
